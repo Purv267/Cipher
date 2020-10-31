@@ -1,0 +1,152 @@
+<html>
+
+<head>
+    <title> CAESARTUTE CIPHER</title>
+    <style>
+        body {
+            background-image: url('https://i.ytimg.com/vi/m9YPpeUCZ3U/maxresdefault.jpg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        h2 {
+            font: outline;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #container {
+            background-color: rgb(105, 105, 105, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1><Strong>
+                <font face="" color="chartreuse">ENCRYTION-DECRYPTION
+            </strong></font>
+        </h1>
+
+        <h2><U>
+                <font color="powderblue">CAESARTUTE CIPHER
+            </U></font>
+        </h2>
+        <script type="text/javascript">
+
+            function Encrypt() {
+                key = document.getElementById("g").value;
+                plaintext = document.getElementById("p").value.toLowerCase();
+                if (plaintext.length < 1) { alert("please enter some plaintext"); return; }
+                console.log("hi!!there");
+                shift = parseInt(document.getElementById("key").value);
+                ciphertext = ""; var re = /[a-z]/;
+                for (i = 0; i < plaintext.length; i++) {
+                    if (re.test(plaintext.charAt(i))) {
+                        ciphertext += String.fromCharCode((plaintext.charCodeAt(i) - 97 + shift) % 26 + 97);
+                    }
+                    else {
+                        ciphertext += plaintext.charAt(i);
+                    }
+                }
+
+                if (key.length != 26) { alert("key must be 26 characters in length"); return; }
+                cipher = "";
+                var re = /[a-z]/;
+                for (i = 0; i < ciphertext.length; i++) {
+                    if (re.test(ciphertext.charAt(i))) {
+                        if (ciphertext.charAt(i)) cipher += key.charAt(ciphertext.charCodeAt(i) - 97);
+
+                    } else {
+                        cipher += ciphertext.charAt(i);
+                    }
+                    document.getElementById("c").value = cipher; //remove the comment
+                }
+            }
+
+
+            function Decrypt(f) {
+                cipher = document.getElementById("c").value.toLowerCase();
+                key = document.getElementById("g").value;
+                if (cipher.length < 1) { alert("please enter some ciphertext (letters only)"); return; }
+                shift = parseInt(document.getElementById("key").value);
+                if (key.length != 26) { alert("key must be 26 characters in length"); return; }
+                ciphertext = ""; var re = /[a-z]/;
+                for (i = 0; i < cipher.length; i++) {
+                    if (re.test(cipher.charAt(i))) ciphertext += String.fromCharCode(key.indexOf(cipher.charAt(i)) + 97);
+                    else ciphertext += cipher.charAt(i);
+                }
+
+                if (ciphertext.length < 1) { alert("please enter some ciphertext"); return; }
+                plaintext = ""; var re = /[a-z]/;
+                for (i = 0; i < ciphertext.length; i++) {
+                    if (re.test(ciphertext.charAt(i))) {
+                        plaintext += String.fromCharCode((ciphertext.charCodeAt(i) - 97 + 26 - shift) % 26 + 97);
+                    }
+                    else {
+                        plaintext += ciphertext.charAt(i);
+                    }
+                }
+                document.getElementById("p").value = plaintext;
+            }
+
+            function genKey() {
+                var keychars = "abcdefghijklmnopqrstuvwxyz";
+                var chars = keychars.split("");
+                ret = ""; lim = chars.length;
+                for (i = 0; i < lim; i++) {
+                    index = Math.floor(chars.length * Math.random());
+                    ret += chars[index];
+                    chars.splice(index, 1);
+                }
+                document.getElementById("g").value = ret;
+            }
+
+
+        </script>
+        <div id="container">
+            <h3><b><U>
+                        <Font color="black" face="Serif"> Plain text</Font>
+                    </U></b></h3><br />
+            <textarea id="p" name="p" rows="3" cols="50" placeholder=" Here type your plaintext."></textarea>
+            <p> shift: <select id="key" name="key" size="1">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected="selected">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                </select></p>
+            Your Key: <input id="g" name="g" size="25" maxchars="25" type="text">
+            <input name="btnGenKey" value="Genrate Key" onclick="genKey()" type="button" />
+            <p><input name="btnEn" value="Encryption" onclick="Encrypt()" type="button" />
+                <input name="btnDe" value="Decryption" onclick="Decrypt()" type="button" /></p>
+            <p><b><U><br>
+                        <Font color="black" face="Arial">Ciphertext</Font> <br>
+                    </U></b></br><textarea id="c" name="c" rows="3" cols="50"
+                    placeholder="Here you will get your cipher text. "></textarea>
+            </p>
+
+    </center>
+    </div>
+
+</html>
